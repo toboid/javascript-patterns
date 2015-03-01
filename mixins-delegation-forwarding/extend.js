@@ -19,19 +19,30 @@ function extend () {
 }
 
 var customer123 = {
-  balance: 100,
-  rate: 0.05
-};
+      balance: 100,
+      rate: 0.05
+    },
+    interestCalculator = {
+      getInterest: function() {
+        return this.rate * this.balance;
+      }
+    },
+    depositor = {
+      setBalance: function(balance) {
+        this.balance = balance;
+      }
+    };
 
-var accountHolder = {
-  getInterest: function() {
-    return this.rate * this.balance;
-  }
-};
-
-extend(customer123, accountHolder);
+extend(customer123, interestCalculator, depositor);
 
 lab.test('calculates interest', function(done) {
   expect(customer123.getInterest()).to.be.equal(5);
   done();
 });
+
+lab.test('sets deposit', function(done) {
+  customer123.setBalance(200);
+  expect(customer123.getInterest()).to.be.equal(10);
+  done();
+});  
+
