@@ -12,35 +12,39 @@ function extend () {
     for (var key in provider) {
       if (provider.hasOwnProperty(key)) {
         consumer[key] = provider[key];
-      };
-    };
+      }
+    }
   });
   return consumer;
 }
 
 var customer123 = {
-      balance: 100,
-      rate: 0.05
-    },
-    interestCalculator = {
-      getInterest: function() {
-        return this.rate * this.balance;
-      }
-    },
-    depositor = {
-      setBalance: function(balance) {
-        this.balance = balance;
-      }
-    };
+  balance: 100,
+  rate: 0.05
+};
+
+var interestCalculator = {
+  getInterest: function() {
+    return this.rate * this.balance;
+  }
+};
+
+var depositor = {
+  setBalance: function(balance) {
+    this.balance = balance;
+  }
+};
 
 extend(customer123, interestCalculator, depositor);
 
-lab.test('calculates interest', function(done) {
+lab.test('adds a method from the first provider', function(done) {
   expect(customer123.getInterest()).to.be.equal(5);
   done();
 });
 
-lab.test('sets deposit', function(done) {
+lab.test('adds a method from the second provider', function(done) {
+  // Note that this is one of the issues with this approach - the two templates are both interacting with balance
+  // but that's not clear when working with either individually.
   customer123.setBalance(200);
   expect(customer123.getInterest()).to.be.equal(10);
   done();
