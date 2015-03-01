@@ -1,0 +1,9 @@
+{
+  "name": "javascript-stuff",
+  "version": "0.0.1",
+  "description": "Javascript idioms, patterns, notes and scratch",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:toboid/javascript-stuff.git"
+  }
+}
