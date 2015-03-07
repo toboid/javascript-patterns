@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
 
+// Implementation can be changed at run time as a result of late binding and delegating to own property.
 function delegateToOwn (receiver, methods, propertyName) {
   methods.forEach(function (methodName) {
     receiver[methodName] = function () {

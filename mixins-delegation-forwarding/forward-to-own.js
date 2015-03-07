@@ -1,5 +1,8 @@
 var expect = require('chai').expect;
 
+// Forwarding to own property allows changing of provider at run time. 
+// However since forwarding allows state to be held on the provider, the state would also change, 
+// may or may not be what is requried depending on situation.
 function forwardToOwn (receiver, methods, propertyName) {
   methods.forEach(function (methodName) {
     receiver[methodName] = function () {

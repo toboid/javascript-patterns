@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
 
+// Late binding achieved by looking target method up by name and wrapping in a function.
 function forward (receiver, methods, provider) {
   methods.forEach(function (methodName) {
     receiver[methodName] = function () {
