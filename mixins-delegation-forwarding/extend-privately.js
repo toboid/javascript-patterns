@@ -13,28 +13,39 @@ function extendPrivately (consumer, provider) {
   return consumer;
 }
 
-var customer123 = {};
+lab.experiment('private extend', function () {
+  var customer123, 
+      hasBalance;
 
-var hasBalance = {
-  balance: function() { 
-    return this._balance; 
-  },
-  setBalance: function(balance) {
-    this._balance = balance;
-  }
-};
+  lab.beforeEach(function(done) {
 
-extendPrivately(customer123, hasBalance);
+    customer123 = {};
 
-lab.test('adds the methods from the provider', function(done) {
-  customer123.setBalance(10);
-  expect(customer123.balance()).to.be.equal(10);
-  done();
-});
+    hasBalance = {
+      balance: function() { 
+        return this._balance; 
+      },
+      setBalance: function(balance) {
+        this._balance = balance;
+      }
+    };
 
-lab.test('keeps internal state private', function(done) {
-  customer123.setBalance(10);
-  expect(customer123.balance).not.to.be.have.property('_balance');
-  done();
+    extendPrivately(customer123, hasBalance);
+
+    customer123.setBalance(10);
+
+    done();
+  });
+
+  lab.test('adds the methods from the provider', function(done) {
+    expect(customer123.balance()).to.be.equal(10);
+    done();
+  });
+
+  lab.test('keeps internal state private', function(done) {
+    expect(customer123.balance).not.to.be.have.property('_balance');
+    done();
+  });
+
 });
 
