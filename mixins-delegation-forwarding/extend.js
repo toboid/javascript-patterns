@@ -1,5 +1,3 @@
-var Lab = require('lab');
-var lab = exports.lab = Lab.script();
 var expect = require('chai').expect;
 
 // lodash has _.assign which is similar
@@ -18,35 +16,40 @@ function extend () {
   return consumer;
 }
 
-var customer123 = {
-  balance: 100,
-  rate: 0.05
-};
+describe('extend', function() {
+  var customer123,
+      interestCalculator,
+      depositor;
 
-var interestCalculator = {
-  getInterest: function() {
-    return this.rate * this.balance;
-  }
-};
+  beforeEach(function() {
+    customer123 = {
+      balance: 100,
+      rate: 0.05
+    };
 
-var depositor = {
-  setBalance: function(balance) {
-    this.balance = balance;
-  }
-};
+    interestCalculator = {
+      getInterest: function() {
+        return this.rate * this.balance;
+      }
+    };
 
-extend(customer123, interestCalculator, depositor);
+    depositor = {
+      setBalance: function(balance) {
+        this.balance = balance;
+      }
+    };
 
-lab.test('adds a method from the first provider', function(done) {
-  expect(customer123.getInterest()).to.be.equal(5);
-  done();
+    extend(customer123, interestCalculator, depositor);
+  });
+
+  it('adds a method from the first provider', function() {
+    expect(customer123.getInterest()).to.be.equal(5);
+  });
+
+  it('adds a method from the second provider', function() {
+    // Note that this is one of the issues with this approach - the two templates are both interacting with balance
+    // but that's not clear when working with either individually.
+    customer123.setBalance(200);
+    expect(customer123.getInterest()).to.be.equal(10);
+  });  
 });
-
-lab.test('adds a method from the second provider', function(done) {
-  // Note that this is one of the issues with this approach - the two templates are both interacting with balance
-  // but that's not clear when working with either individually.
-  customer123.setBalance(200);
-  expect(customer123.getInterest()).to.be.equal(10);
-  done();
-});  
-

@@ -1,5 +1,3 @@
-var Lab = require('lab');
-var lab = exports.lab = Lab.script();
 var expect = require('chai').expect;
 
 function forward (receiver, methods, provider) {
@@ -12,11 +10,11 @@ function forward (receiver, methods, provider) {
   return receiver;
 };
 
-lab.experiment('forwarding', function () {
+describe('forwarding', function () {
   var customer123, 
       accountHolder;
 
-  lab.beforeEach(function (done) {
+  beforeEach(function () {
     customer123 = {};
 
     accountHolder = {
@@ -32,24 +30,17 @@ lab.experiment('forwarding', function () {
     forward(customer123, ['balance', 'setBalance'], accountHolder);
 
     customer123.setBalance(10);
-
-    done();
   });
 
-  lab.test('adds methods to receiver', function(done) {
+  it('adds methods to receiver', function() {
     expect(customer123.balance()).to.be.equal(10);
-    done();
   });
 
-  lab.test('no state held on receiver', function(done) {
+  it('no state held on receiver', function() {
     expect(customer123._balance).to.be.undefined;
-    done();
   });
 
-  lab.test('state is held by the provider', function(done) {
+  it('state is held by the provider', function() {
     expect(accountHolder._balance).to.be.equal(10);
-    done();
   });  
 });
-
-

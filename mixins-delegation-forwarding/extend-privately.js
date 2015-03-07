@@ -1,5 +1,3 @@
-var Lab = require('lab');
-var lab = exports.lab = Lab.script();
 var expect = require('chai').expect;
 
 function extendPrivately (consumer, provider) {
@@ -13,11 +11,11 @@ function extendPrivately (consumer, provider) {
   return consumer;
 }
 
-lab.experiment('private extend', function () {
+describe('private extend', function () {
   var customer123, 
       hasBalance;
 
-  lab.beforeEach(function(done) {
+  beforeEach(function() {
 
     customer123 = {};
 
@@ -33,18 +31,14 @@ lab.experiment('private extend', function () {
     extendPrivately(customer123, hasBalance);
 
     customer123.setBalance(10);
-
-    done();
   });
 
-  lab.test('adds the methods from the provider', function(done) {
+  it('adds the methods from the provider', function() {
     expect(customer123.balance()).to.be.equal(10);
-    done();
   });
 
-  lab.test('keeps internal state private', function(done) {
+  it('keeps internal state private', function() {
     expect(customer123.balance).not.to.be.have.property('_balance');
-    done();
   });
 
 });
