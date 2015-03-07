@@ -36,7 +36,7 @@ describe('forwarding', function () {
     expect(customer123.balance()).to.be.equal(10);
   });
 
-  it('no state held on receiver', function() {
+  it('no state added to receiver', function() {
     expect(customer123._balance).to.be.undefined;
   });
 
