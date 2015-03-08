@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 
-// Forwarding to own property allows changing of provider at run time. 
-// However since forwarding allows state to be held on the provider, the state would also change, 
+// Forwarding to own property allows changing of provider at run time.
+// However since forwarding allows state to be held on the provider, the state would also change,
 // may or may not be what is requried depending on situation.
 function forwardToOwn (receiver, methods, propertyName) {
   methods.forEach(function (methodName) {
@@ -12,10 +12,10 @@ function forwardToOwn (receiver, methods, propertyName) {
   });
 
   return receiver;
-};
+}
 
 describe('forward to own', function () {
-  var customer123, 
+  var customer123,
       accountHolder;
 
   beforeEach(function () {
@@ -43,7 +43,7 @@ describe('forward to own', function () {
 
   it('state is held by the provider', function() {
     expect(accountHolder._balance).to.be.equal(10);
-  });   
+  });
 
   it('can change implementation at run time', function() {
     // State changes too since it's held on the provider

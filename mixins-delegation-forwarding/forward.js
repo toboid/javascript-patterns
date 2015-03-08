@@ -9,10 +9,10 @@ function forward (receiver, methods, provider) {
   });
 
   return receiver;
-};
+}
 
 describe('forwarding', function () {
-  var customer123, 
+  var customer123,
       accountHolder;
 
   beforeEach(function () {
@@ -43,5 +43,5 @@ describe('forwarding', function () {
 
   it('state is held by the provider', function() {
     expect(accountHolder._balance).to.be.equal(10);
-  });  
+  });
 });

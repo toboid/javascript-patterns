@@ -10,10 +10,10 @@ function delegateToOwn (receiver, methods, propertyName) {
   });
 
   return receiver;
-};
+}
 
 describe('delegate to own', function () {
-  var customer123, 
+  var customer123,
       accountHolder;
 
   beforeEach(function () {
