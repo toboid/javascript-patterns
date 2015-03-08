@@ -1,10 +1,10 @@
 Based on this excellent blog post http://raganwald.com/2014/04/10/mixins-forwarding-delegation.html
 
 
-|| Early-bound | Late-bound | 
-| ------------------------------------------------- |
+|  | Early-bound | Late-bound |
+|----------------------|---------------|------------|
 | Receiver’s context | Mixin | Delegation |
-| Metaobject’s context | Private Mixin | Forwarding |
+| Metaobject’s context | Private Mixin |  |
 
 * Late binding property of delegation and forwarding allows for state pattern
   * Assign metaobject to a property of the receiver
